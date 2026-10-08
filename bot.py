@@ -96,8 +96,7 @@ def main_menu(user_id):
 
     if is_owner(user_id):
         kb.row(
-            types.InlineKeyboardButton("👥 إدارة المستخدمين", callback_data="manage_users"),
-            types.InlineKeyboardButton("🚨 إغلاق طارئ", callback_data="kill_switch")
+            types.InlineKeyboardButton("👥 إدارة المستخدمين", callback_data="manage_users")
         )
 
     return kb
@@ -137,13 +136,6 @@ def callback_handler(call):
             bot.answer_callback_query(call.id, "غير مصرح.", show_alert=True)
             return
         manage_users(chat_id)
-
-    elif data == "kill_switch":
-        if not is_owner(call.from_user.id):
-            bot.answer_callback_query(call.id, "غير مصرح.", show_alert=True)
-            return
-        bot.answer_callback_query(call.id, "تم تفعيل وضع الإغلاق.", show_alert=True)
-        bot.send_message(chat_id, "🚨 وضع الإغلاق مفعّل. أوقف البوت يدوياً بـ Ctrl+C.")
 
     elif data in SAFE_HANDLERS:
         SAFE_HANDLERS[data](chat_id)
