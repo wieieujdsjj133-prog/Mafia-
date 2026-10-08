@@ -1,3 +1,4 @@
+from tools.manager.assistant import handle_install_request
 # bot.py
 # Telegram Tool Manager - safe modular starter
 # Install: pip install pyTelegramBotAPI psutil
